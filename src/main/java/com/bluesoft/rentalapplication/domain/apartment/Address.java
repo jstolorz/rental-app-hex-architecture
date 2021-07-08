@@ -1,6 +1,6 @@
 package com.bluesoft.rentalapplication.domain.apartment;
 
-public class Address {
+class Address {
     private final String street;
     private final String postalCode;
     private final String houseNumber;
@@ -8,7 +8,7 @@ public class Address {
     private final String city;
     private final String country;
 
-    public Address(
+     Address(
             final String street,
             final String postalCode,
             final String houseNumber,
