@@ -1,5 +1,8 @@
 package com.bluesoft.rentalapplication.domain.apartment;
 
+import javax.persistence.Embeddable;
+
+@Embeddable
 class SquerMeter {
     private Double size;
 
