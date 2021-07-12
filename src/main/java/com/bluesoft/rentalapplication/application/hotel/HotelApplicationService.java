@@ -6,7 +6,6 @@ import com.bluesoft.rentalapplication.domain.hotel.HotelFactory;
 public class HotelApplicationService {   // Adapter
 
     public void add(
-            String hotelID,
             String name,
             String street,
             String buildingNumber,
@@ -15,7 +14,7 @@ public class HotelApplicationService {   // Adapter
             String country
 
     ){
-       Hotel hotel = new HotelFactory().create(hotelID,name,street,buildingNumber,postalCode,city,country);
+       Hotel hotel = new HotelFactory().create(name,street,buildingNumber,postalCode,city,country);
     }
 
 

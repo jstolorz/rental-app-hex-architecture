@@ -3,7 +3,6 @@ package com.bluesoft.rentalapplication.domain.hotel;
 
 public class HotelFactory {
     public Hotel create(
-            final String hotelID,
             final String name,
             final String street,
             final String buildingNumber,
@@ -13,8 +12,6 @@ public class HotelFactory {
     {
 
         Address address = new Address(street, buildingNumber,postalCode, city, country);
-        Hotel hotel = new Hotel(hotelID, name, address);
-
-        return null;
+        return new Hotel(name, address);
     }
 }

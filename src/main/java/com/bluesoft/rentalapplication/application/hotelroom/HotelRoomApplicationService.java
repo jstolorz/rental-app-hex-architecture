@@ -8,13 +8,13 @@ import java.util.Map;
 public class HotelRoomApplicationService {  // Adapter
 
     public void add(
-            String hotelID,
+            String hotelId,
             int number,
             String description,
-            Map<String, Double> roomsDefinition
+            Map<String, Double> spacesDefinition
     ){
 
-       HotelRoom hotelRoom = new HotelRoomFactory().create(hotelID,number,description,roomsDefinition);
+       HotelRoom hotelRoom = new HotelRoomFactory().create(hotelId,number,description,spacesDefinition);
 
     }
 
