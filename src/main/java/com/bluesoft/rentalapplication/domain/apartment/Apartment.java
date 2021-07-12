@@ -1,7 +1,9 @@
 package com.bluesoft.rentalapplication.domain.apartment;
 
+import javax.persistence.Entity;
 import java.util.List;
 
+@Entity
 public class Apartment {
     private final String ownerId;
     private final Address address;
