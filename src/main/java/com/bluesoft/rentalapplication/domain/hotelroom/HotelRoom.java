@@ -1,9 +1,12 @@
 package com.bluesoft.rentalapplication.domain.hotelroom;
 
+import com.bluesoft.rentalapplication.domain.eventchannel.EventChannel;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import java.time.LocalDate;
 import java.util.List;
 
 @Entity
@@ -11,7 +14,7 @@ public class HotelRoom {
 
     @Id
     @GeneratedValue
-    private String id;
+    private String hotelRoomId;
 
     private final String hotelId;
     private final int number;
@@ -26,5 +29,10 @@ public class HotelRoom {
         this.number = number;
         this.description = description;
         this.spaces = spaces;
+    }
+
+    public void book(final String tenantId, final List<LocalDate> days, final EventChannel eventChannel) {
+        HotelRoomBooked hotelRoomBooked = HotelRoomBooked.create(hotelId,tenantId,days);
+        eventChannel.publish(hotelRoomBooked);
     }
 }
