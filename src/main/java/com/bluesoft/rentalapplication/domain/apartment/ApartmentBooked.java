@@ -9,7 +9,7 @@ public class ApartmentBooked {
 
     private final String eventId;
     private final LocalDateTime eventCreationDateTime;
-    private final String apartmemtId;
+    private final String apartmentId;
     private final String ownerId;
     private final String tenantId;
     private final LocalDate periodStart;
@@ -20,7 +20,7 @@ public class ApartmentBooked {
 
         this.eventId = eventId;
         this.eventCreationDateTime = eventCreationDateTime;
-        this.apartmemtId = apartmemtId;
+        this.apartmentId = apartmemtId;
         this.ownerId = ownerId;
         this.tenantId = tenantId;
         periodStart = period.getStart();
@@ -42,8 +42,8 @@ public class ApartmentBooked {
         return eventCreationDateTime;
     }
 
-   public String getApartmemtId() {
-        return apartmemtId;
+   public String getApartmentId() {
+        return apartmentId;
     }
 
    public String getOwnerId() {
