@@ -1,10 +1,7 @@
 package com.bluesoft.rentalapplication.infrastructure.rest.api.apartment;
 
 import com.bluesoft.rentalapplication.application.apartment.ApartmentApplicationService;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/apartment")
@@ -28,5 +25,14 @@ public class ApartmentRestController {
                apartmentDto.getDescription(),
                apartmentDto.getRoomsDefinition()
        );
+    }
+
+    @PutMapping("/book/{id}")
+    public void book(@RequestBody ApartmentBookingDto apartmentBookingDto,@PathVariable String id){
+          apartmentApplicationService.book(
+                  id,
+                  apartmentBookingDto.getTenantId(),
+                  apartmentBookingDto.getStart(),
+                  apartmentBookingDto.getEnd());
     }
 }

@@ -4,6 +4,7 @@ import com.bluesoft.rentalapplication.domain.apartment.Apartment;
 import com.bluesoft.rentalapplication.domain.apartment.ApartmentFactory;
 import com.bluesoft.rentalapplication.domain.apartment.ApartmentRepository;
 
+import java.time.LocalDate;
 import java.util.Map;
 
 public class ApartmentApplicationService {     // Adapter
@@ -33,5 +34,7 @@ public class ApartmentApplicationService {     // Adapter
      }
 
 
+    public void book(final String id, final String tenantId, final LocalDate start, final LocalDate end) {
 
+    }
 }
