@@ -28,6 +28,7 @@ public class Apartment {
     }
 
     public void book(final String tenantId, final Period period) {
-         // publish an event
+         // publish an eventcreate
+        ApartmentBooked apartmentBooked = ApartmentBooked.create(id, ownerId, tenantId, period); // << Object of Event
     }
 }
