@@ -1,10 +1,18 @@
 package com.bluesoft.rentalapplication.domain.apartmentbookinghistory;
 
-public class ApartmentBookingHistory {
-    public ApartmentBookingHistory(final String apartmentId) {
+import java.util.ArrayList;
+import java.util.List;
 
+public class ApartmentBookingHistory {
+
+    private final String apartmentId;
+    private final List<ApartmentBooking> bookings = new ArrayList<>();
+
+    public ApartmentBookingHistory(String apartmentId) {
+         this.apartmentId = apartmentId;
     }
 
-    public void add(final ApartmentBooking start) {
+    public void add(final ApartmentBooking apartmentBooking) {
+        bookings.add(apartmentBooking);
     }
 }
