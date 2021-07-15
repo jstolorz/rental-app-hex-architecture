@@ -3,10 +3,10 @@ package com.bluesoft.rentalapplication.domain.hotelroom;
 import javax.persistence.Embeddable;
 
 @Embeddable
-class SquerMeter {
+class SquareMeter {
     private final double value;
 
-    SquerMeter(final double value) {
+    SquareMeter(final double value) {
         this.value = value;
     }
 }

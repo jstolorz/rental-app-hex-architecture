@@ -8,26 +8,18 @@ import org.springframework.web.bind.annotation.*;
 public class HotelRoomRestController {
     private final HotelRoomApplicationService hotelRoomApplicationService;
 
-    public HotelRoomRestController(final HotelRoomApplicationService hotelRoomApplicationService) {
+    public HotelRoomRestController(HotelRoomApplicationService hotelRoomApplicationService) {
         this.hotelRoomApplicationService = hotelRoomApplicationService;
     }
 
     @PostMapping
-    public void add(@RequestBody HotelRoomDto hotelRoomDto){
+    public void add(@RequestBody HotelRoomDto hotelRoomDto) {
         hotelRoomApplicationService.add(
-                hotelRoomDto.getHotelId(),
-                hotelRoomDto.getNumber(),
-                hotelRoomDto.getDescription(),
-                hotelRoomDto.getSpacesDefinition()
-        );
+                hotelRoomDto.getHotelId(), hotelRoomDto.getNumber(), hotelRoomDto.getSpacesDefinition(), hotelRoomDto.getDescription());
     }
 
     @PutMapping("/book/{id}")
-    public void book(@PathVariable String  id, @RequestBody HotelRoomBookingDto hotelRomBookingDto){
-        hotelRoomApplicationService.book(
-                id,
-                hotelRomBookingDto.getTenantId(),
-                hotelRomBookingDto.getDays()
-                );
+    public void book(@PathVariable String id, @RequestBody HotelRoomBookingDto hotelBookingDto) {
+        hotelRoomApplicationService.book(id, hotelBookingDto.getTenantId(), hotelBookingDto.getDays());
     }
 }

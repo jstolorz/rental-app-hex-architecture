@@ -6,16 +6,14 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 public class HotelRoomFactory {
-    public HotelRoom create(final String hotelId, final int number, final String description, final Map<String, Double> spacesDefinition) {
-
-        List<Space> spaces = spacesDefinition.entrySet()
-                .stream()
-                .map(keyValue -> {
-                    SquerMeter squerMeter = new SquerMeter(keyValue.getValue());
-                    return new Space(keyValue.getKey(), squerMeter);
+    public HotelRoom create(String hotelId, int number, Map<String, Double> spacesDefinition, String description) {
+        List<Space> spaces = spacesDefinition.entrySet().stream()
+                .map(entry -> {
+                    SquareMeter squareMeter = new SquareMeter(entry.getValue());
+                    return new Space(entry.getKey(), squareMeter);
                 })
                 .collect(Collectors.toList());
 
-        return new HotelRoom(hotelId,number,description,spaces);
+        return new HotelRoom(hotelId, number, spaces, description);
     }
 }

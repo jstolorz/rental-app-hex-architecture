@@ -11,28 +11,26 @@ import java.util.List;
 
 @Entity
 public class HotelRoom {
-
     @Id
     @GeneratedValue
     private String hotelRoomId;
-
     private final String hotelId;
     private final int number;
-    private final String description;
 
     @OneToMany
     private final List<Space> spaces;
 
-    HotelRoom(final String hotelId, final int number, final String description, final List<Space> spaces) {
+    private final String description;
 
+    HotelRoom(String hotelId, int number, List<Space> spaces, String description) {
         this.hotelId = hotelId;
         this.number = number;
-        this.description = description;
         this.spaces = spaces;
+        this.description = description;
     }
 
-    public void book(final String tenantId, final List<LocalDate> days, final EventChannel eventChannel) {
-        HotelRoomBooked hotelRoomBooked = HotelRoomBooked.create(hotelId,tenantId,days);
+    public void book(String tenantId, List<LocalDate> days, EventChannel eventChannel) {
+        HotelRoomBooked hotelRoomBooked = HotelRoomBooked.create(hotelRoomId, hotelId, tenantId, days);
         eventChannel.publish(hotelRoomBooked);
     }
 }

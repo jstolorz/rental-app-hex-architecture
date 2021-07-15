@@ -15,9 +15,9 @@ class Space {
     private final String name;
 
     @Embedded
-    private final SquerMeter squerMeter;
+    private final SquareMeter squerMeter;
 
-    Space(final String name, final SquerMeter squerMeter) {
+    Space(final String name, final SquareMeter squerMeter) {
 
         this.name = name;
         this.squerMeter = squerMeter;
