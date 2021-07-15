@@ -10,10 +10,12 @@ public class ApartmentApplicationService {     // Adapter
 
     private final ApartmentRepository apartmentRepository;
     private final EventChannel eventChannel;
+    private final BookingRepository bookingRepository;
 
-    public ApartmentApplicationService(final ApartmentRepository apartmentRepository, final EventChannel eventChannel) {
+    public ApartmentApplicationService(final ApartmentRepository apartmentRepository, final EventChannel eventChannel, final BookingRepository bookingRepository) {
         this.apartmentRepository = apartmentRepository;
         this.eventChannel = eventChannel;
+        this.bookingRepository = bookingRepository;
     }
 
     public void add(
@@ -38,6 +40,8 @@ public class ApartmentApplicationService {     // Adapter
     public void book(final String id, final String tenantId, final LocalDate start, final LocalDate end) {
          Apartment apartment = apartmentRepository.findById(id);
          Period period = new Period(start,end);
-         apartment.book(tenantId, period, eventChannel);
+         Booking booking = apartment.book(tenantId, period, eventChannel);
+
+         bookingRepository.save(booking);
     }
 }

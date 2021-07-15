@@ -29,9 +29,11 @@ public class Apartment {
         this.rooms = rooms;
     }
 
-    public void book(final String tenantId, final Period period, final EventChannel eventChannel) {
+    public Booking book(final String tenantId, final Period period, final EventChannel eventChannel) {
          // publish an eventcreate
         ApartmentBooked apartmentBooked = ApartmentBooked.create(id, ownerId, tenantId, period); // << Object of Event
         eventChannel.publish(apartmentBooked);
+
+        return new Booking(id,tenantId,period);
     }
 }
