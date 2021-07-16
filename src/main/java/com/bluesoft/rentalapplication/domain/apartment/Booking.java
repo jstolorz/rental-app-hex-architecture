@@ -1,5 +1,7 @@
 package com.bluesoft.rentalapplication.domain.apartment;
 
+import com.bluesoft.rentalapplication.domain.eventchannel.EventChannel;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -8,7 +10,6 @@ import java.util.List;
 
 @Entity
 public class Booking {
-
 
     @Id
     @GeneratedValue
@@ -39,5 +40,13 @@ public class Booking {
 
     public void reject() {
        bookingStatus = BookingStatus.REJECTED;
+    }
+
+    public void accept(final EventChannel eventChannel) {
+        bookingStatus = BookingStatus.ACCEPT;
+
+        BookingAccepted bookingAccepted = BookingAccepted.create(rentalType,rentalPlaceId,tenantId,days);
+        eventChannel.publish(bookingAccepted);
+
     }
 }
