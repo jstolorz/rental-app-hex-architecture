@@ -1,6 +1,7 @@
 package com.bluesoft.rentalapplication.infrastructure.rest.api.apartment;
 
 import com.bluesoft.rentalapplication.application.apartment.ApartmentApplicationService;
+import com.bluesoft.rentalapplication.query.apartment.ApartmentDetails;
 import com.bluesoft.rentalapplication.query.apartment.ApartmentReadModel;
 import com.bluesoft.rentalapplication.query.apartment.QueryApartmentRepository;
 import org.springframework.web.bind.annotation.*;
@@ -43,5 +44,10 @@ public class ApartmentRestController {
     @GetMapping
     public Iterable<ApartmentReadModel> findAll(){
         return queryApartmentRepository.findAll();
+    }
+
+    @GetMapping("/{id}")
+    public ApartmentDetails findById(@PathVariable String  id){
+        return queryApartmentRepository.findById(id);
     }
 }
