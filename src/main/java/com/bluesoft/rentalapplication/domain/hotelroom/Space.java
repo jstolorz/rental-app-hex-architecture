@@ -1,11 +1,9 @@
 package com.bluesoft.rentalapplication.domain.hotelroom;
 
-import javax.persistence.Embedded;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
+@Table(name = "HOTEL_ROOM_SPACE")
 class Space {
 
     @Id
