@@ -1,19 +1,20 @@
 package com.bluesoft.rentalapplication.infrastructure.rest.api.hotel;
 
 import com.bluesoft.rentalapplication.application.hotel.HotelApplicationService;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.bluesoft.rentalapplication.query.hotel.HotelReadModel;
+import com.bluesoft.rentalapplication.query.hotel.QueryHotelRepository;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/hotel")
 public class HotelRestController {
 
     private final HotelApplicationService hotelApplicationService;
+    private final QueryHotelRepository queryHotelRepository;
 
-    public HotelRestController(final HotelApplicationService hotelApplicationService) {
+    public HotelRestController(final HotelApplicationService hotelApplicationService, final QueryHotelRepository queryHotelRepository) {
         this.hotelApplicationService = hotelApplicationService;
+        this.queryHotelRepository = queryHotelRepository;
     }
 
     @PostMapping
@@ -26,5 +27,10 @@ public class HotelRestController {
                 hotelDto.getCity(),
                 hotelDto.getCountry()
         );
+    }
+
+    @GetMapping
+    public Iterable<HotelReadModel> findAll(){
+        return queryHotelRepository.findAll();
     }
 }
