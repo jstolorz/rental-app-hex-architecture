@@ -31,6 +31,13 @@ class PeriodTest {
     }
 
     @Test
+    void shouldReturnOneDateWhenStartAndEndAreTheSame(){
+        final LocalDate date = LocalDate.of(2021, 7, 20);
+        final List<LocalDate> actual = new Period(date, date).asDays();
+        assertThat(actual).containsExactly(date);
+    }
+
+    @Test
     void shouldReturnAllDaysBetweenStartAndEnd(){
         final LocalDate start = LocalDate.of(2020,1,1);
         final LocalDate end = LocalDate.of(2020,1,3);
