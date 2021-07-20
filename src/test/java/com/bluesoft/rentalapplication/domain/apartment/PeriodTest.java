@@ -42,7 +42,7 @@ class PeriodTest {
 
     @ParameterizedTest
     @MethodSource("daysBetweenStartAndEnd")
-    private void shouldReturnAllDaysBetweenStartAndEnd(final LocalDate start, final LocalDate end, final Iterable<LocalDate> expected) {
+    void shouldReturnAllDaysBetweenStartAndEnd(final LocalDate start, final LocalDate end, final Iterable<LocalDate> expected) {
         final List<LocalDate> actual = new Period(start, end).asDays();
 
         assertThat(actual).containsExactlyElementsOf(expected);
@@ -51,15 +51,12 @@ class PeriodTest {
     private static Stream<Arguments> daysBetweenStartAndEnd() {
         return Stream.of(
                 Arguments.of(
-                        LocalDate.of(2020,1,1),
-                        LocalDate.of(2020,1,2),
-                        LocalDate.of(2020,1,3)
+                         LocalDate.of(2021,1,1),LocalDate.of(2021,1,3),
+                        asList(LocalDate.of(2021,1,1),LocalDate.of(2021,1,2),LocalDate.of(2021,1,3))
                 ),
                 Arguments.of(
-                        LocalDate.of(2020,5,1),
-                        LocalDate.of(2020,5,2),
-                        LocalDate.of(2020,5,3),
-                        LocalDate.of(2020,5,4)
+                        LocalDate.of(2021,5,1),LocalDate.of(2021,5,3),
+                        asList(LocalDate.of(2021,5,1),LocalDate.of(2021,5,2),LocalDate.of(2021,5,3))
                 )
         );
     }
