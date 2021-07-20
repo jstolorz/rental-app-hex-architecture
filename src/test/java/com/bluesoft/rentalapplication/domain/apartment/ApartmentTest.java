@@ -6,6 +6,8 @@ import org.junit.jupiter.api.Test;
 
 import java.util.Map;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 class ApartmentTest {
 
     @Test
@@ -38,22 +40,29 @@ class ApartmentTest {
         assertThatHasOwnerId(actual, ownerId);
         assertThatHasDescription(actual, description);
         assertThatHasAddress(actual, street, postalCode, houseNumber, apartmentNumber, city, country);
-        assertThatHasRomms(actual, roomsDefinition);
+        assertThatHasRooms(actual, roomsDefinition);
     }
 
-    private void assertThatHasRomms(final Apartment actual, final Map<String, Double> roomsDefinition) {
+    private void assertThatHasRooms(final Apartment actual, final Map<String, Double> roomsDefinition) {
 
     }
 
     private void assertThatHasAddress(final Apartment actual, final String street, final String postalCode, final String houseNumber, final String apartmentNumber, final String city, final String country) {
-
+          assertThat(actual).extracting("address")
+                  .hasFieldOrPropertyWithValue("street",street)
+                  .hasFieldOrPropertyWithValue("postalCode",postalCode)
+                  .hasFieldOrPropertyWithValue("houseNumber",houseNumber)
+                  .hasFieldOrPropertyWithValue("apartmentNumber",apartmentNumber)
+                  .hasFieldOrPropertyWithValue("city",city)
+                  .hasFieldOrPropertyWithValue("country",country);
     }
 
     private void assertThatHasDescription(final Apartment actual, final String description) {
-
+         assertThat(actual).hasFieldOrPropertyWithValue("description",description);
     }
 
     private void assertThatHasOwnerId(final Apartment actual, final String ownerId) {
+        assertThat(actual).hasFieldOrPropertyWithValue("ownerId",ownerId);
     }
 
 }
