@@ -18,13 +18,9 @@ class ApartmentTest {
         final String city = "Jaworze";
         final String country = "Poland";
         final String description = "Nice place to stay";
-        final String room1Name = "Toilet";
-        final Double room1Size = 10.0;
-        final String room2Name = "Bedroom";
-        final Double room2Size = 30.0;
 
         final Map<String, Double> roomsDefinition = ImmutableMap.of(
-                room1Name, room1Size, room2Name, room2Size
+                "Toilet", 10.0, "Bedroom", 30.0
         );
 
         final Apartment actual = new ApartmentFactory().create(
