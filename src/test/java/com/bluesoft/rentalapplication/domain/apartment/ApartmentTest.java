@@ -4,6 +4,7 @@ package com.bluesoft.rentalapplication.domain.apartment;
 import com.google.inject.internal.util.ImmutableMap;
 import org.junit.jupiter.api.Test;
 
+import java.util.List;
 import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -11,7 +12,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 class ApartmentTest {
 
     @Test
-    void shouldCreateApartmentWithAllRequiredFields(){
+    void shouldCreateApartmentWithAllRequiredFields() {
         final String ownerId = "1234";
         final String street = "Zdrowotna";
         final String postalCode = "43-384";
@@ -44,25 +45,37 @@ class ApartmentTest {
     }
 
     private void assertThatHasRooms(final Apartment actual, final Map<String, Double> roomsDefinition) {
+        assertThat(actual).extracting("rooms").satisfies(roomsActual -> {
+            List<Room> rooms = (List<Room>) roomsActual;
+            assertThat(rooms).hasSize(roomsDefinition.size());
 
+            roomsDefinition.forEach((name, squareMeter) -> {
+                assertThat(rooms).anySatisfy(room -> {
+                    assertThat(room)
+                            .hasFieldOrPropertyWithValue("name", name)
+                            .hasFieldOrPropertyWithValue("squerMeter.size", squareMeter);
+                });
+            });
+
+        });
     }
 
     private void assertThatHasAddress(final Apartment actual, final String street, final String postalCode, final String houseNumber, final String apartmentNumber, final String city, final String country) {
-          assertThat(actual).extracting("address")
-                  .hasFieldOrPropertyWithValue("street",street)
-                  .hasFieldOrPropertyWithValue("postalCode",postalCode)
-                  .hasFieldOrPropertyWithValue("houseNumber",houseNumber)
-                  .hasFieldOrPropertyWithValue("apartmentNumber",apartmentNumber)
-                  .hasFieldOrPropertyWithValue("city",city)
-                  .hasFieldOrPropertyWithValue("country",country);
+        assertThat(actual).extracting("address")
+                .hasFieldOrPropertyWithValue("street", street)
+                .hasFieldOrPropertyWithValue("postalCode", postalCode)
+                .hasFieldOrPropertyWithValue("houseNumber", houseNumber)
+                .hasFieldOrPropertyWithValue("apartmentNumber", apartmentNumber)
+                .hasFieldOrPropertyWithValue("city", city)
+                .hasFieldOrPropertyWithValue("country", country);
     }
 
     private void assertThatHasDescription(final Apartment actual, final String description) {
-         assertThat(actual).hasFieldOrPropertyWithValue("description",description);
+        assertThat(actual).hasFieldOrPropertyWithValue("description", description);
     }
 
     private void assertThatHasOwnerId(final Apartment actual, final String ownerId) {
-        assertThat(actual).hasFieldOrPropertyWithValue("ownerId",ownerId);
+        assertThat(actual).hasFieldOrPropertyWithValue("ownerId", ownerId);
     }
 
 }

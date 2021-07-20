@@ -8,7 +8,6 @@ com\bluesoft\rentalapplication\application\booking\BookingCommandHandler.class
 com\bluesoft\rentalapplication\domain\apartment\ApartmentRepository.class
 com\bluesoft\rentalapplication\query\hotel\SpringQueryHotelRepository.class
 com\bluesoft\rentalapplication\application\apartment\ApartmentApplicationService.class
-com\bluesoft\rentalapplication\domain\apartment\SquerMeter.class
 com\bluesoft\rentalapplication\query\hotel\HotelReadModel.class
 com\bluesoft\rentalapplication\RentalApplication.class
 com\bluesoft\rentalapplication\domain\hotelroom\HotelRoomRepository.class

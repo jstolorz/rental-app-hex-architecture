@@ -20,7 +20,7 @@ public class ApartmentFactory {  // Port
     {
         Address address = new Address(street, postalCode, houseNumber, apartmentNumber, city, country);
         List<Room> rooms = new ArrayList<>();
-        roomsDefinition.forEach((name, size) -> rooms.add(new Room(name, new SquerMeter(size))));
+        roomsDefinition.forEach((name, size) -> rooms.add(new Room(name, new SquareMeter(size))));
         return new Apartment(ownerId,address, description, rooms);
     }
 }
