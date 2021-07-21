@@ -1,6 +1,5 @@
 package com.bluesoft.rentalapplication.domain.apartment;
 
-
 import com.google.common.collect.ImmutableList;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -15,7 +14,6 @@ import java.util.stream.Stream;
 
 import static java.util.Arrays.asList;
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
-
 
 class BookingAcceptedTest {
 

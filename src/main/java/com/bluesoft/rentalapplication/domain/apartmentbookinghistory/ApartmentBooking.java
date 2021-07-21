@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
 @Table(name = "APARTMENT_BOOKING")
 public class ApartmentBooking {
 
-    private final BookingStep start;
+    private final BookingStep bookingStep;
     private LocalDateTime bookingDateTime;
     private final String ownerId;
     private final String tenantId;
@@ -19,7 +19,7 @@ public class ApartmentBooking {
 
     public ApartmentBooking(final BookingStep start, final LocalDateTime bookingDateTime, final String ownerId, final String tenantId, final BookingPeriod bookingPeriod) {
 
-        this.start = start;
+        this.bookingStep = start;
         this.bookingDateTime = bookingDateTime;
         this.ownerId = ownerId;
         this.tenantId = tenantId;
