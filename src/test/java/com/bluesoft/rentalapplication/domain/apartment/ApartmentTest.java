@@ -3,6 +3,7 @@ package com.bluesoft.rentalapplication.domain.apartment;
 
 import com.bluesoft.rentalapplication.domain.eventchannel.EventChannel;
 import com.google.inject.internal.util.ImmutableMap;
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
 import org.mockito.BDDMockito;
@@ -10,8 +11,6 @@ import org.mockito.Mockito;
 
 import java.time.LocalDate;
 import java.util.Map;
-
-import static org.mockito.ArgumentMatchers.any;
 
 class ApartmentTest {
 
@@ -60,12 +59,21 @@ class ApartmentTest {
 
     @Test
     void shouldPublishApartmentBooked(){
-        ArgumentCaptor captor = ArgumentCaptor.forClass(ApartmentBooked.class);
+        ArgumentCaptor<ApartmentBooked> captor = ArgumentCaptor.forClass(ApartmentBooked.class);
         final Apartment apartment = createApartment();
 
-        final Booking actual = apartment.book(TENANT_ID, PERIOD, eventChannel);
+        apartment.book(TENANT_ID, PERIOD, eventChannel);
 
-        BDDMockito.then(eventChannel).should().publish(any(ApartmentBooked.class));
+        BDDMockito.then(eventChannel).should().publish(captor.capture());
+
+        ApartmentBooked actual = captor.getValue();
+
+        Assertions.assertThat(actual.getTenantId()).isEqualTo(TENANT_ID);
+        Assertions.assertThat(actual.getOwnerId()).isEqualTo(OWNER_ID);
+        Assertions.assertThat(actual.getPeriodStart()).isEqualTo(START);
+        Assertions.assertThat(actual.getPeriodEnd()).isEqualTo(END);
+
+
     }
 
 
