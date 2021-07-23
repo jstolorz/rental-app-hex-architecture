@@ -1,10 +1,17 @@
 package com.bluesoft.rentalapplication.domain.apartment;
 
 
+import com.bluesoft.rentalapplication.domain.eventchannel.EventChannel;
 import com.google.inject.internal.util.ImmutableMap;
 import org.junit.jupiter.api.Test;
+import org.mockito.ArgumentCaptor;
+import org.mockito.BDDMockito;
+import org.mockito.Mockito;
 
+import java.time.LocalDate;
 import java.util.Map;
+
+import static org.mockito.ArgumentMatchers.any;
 
 class ApartmentTest {
 
@@ -20,11 +27,25 @@ class ApartmentTest {
             "Toilet", 10.0, "Bedroom", 30.0
     );
     public static final ApartmentFactory APARTMENT_FACTORY = new ApartmentFactory();
+    private static final String TENANT_ID = "2345";
+    private static final LocalDate START = LocalDate.of(2021,7,10);
+    private static final LocalDate END = LocalDate.of(2021, 7, 15);
+    private static final Period PERIOD = new Period(START, END);
+    private EventChannel eventChannel = Mockito.mock(EventChannel.class);
 
     @Test
     void shouldCreateApartmentWithAllRequiredFields() {
 
-        final Apartment actual = APARTMENT_FACTORY.create(
+        final Apartment actual = createApartment();
+        ApartmentAssertion.assertThat(actual)
+               .HasOwnerIdEqualsTo( OWNER_ID)
+               .HasDescriptionEqualsTo( DESCRIPTION)
+               .HasAddressEqualsTo( STREET, POSTAL_CODE, HOUSE_NUMBER, APARTMENT_NUMBER, CITY, COUNTRY)
+               .HasRoomsEqualsTo( ROOMS_DEFINITION);
+    }
+
+    private Apartment createApartment() {
+        return APARTMENT_FACTORY.create(
                 OWNER_ID,
                 STREET,
                 POSTAL_CODE,
@@ -35,12 +56,30 @@ class ApartmentTest {
                 DESCRIPTION,
                 ROOMS_DEFINITION
         );
-        ApartmentAssertion.assertThat(actual)
-               .HasOwnerIdEqualsTo( OWNER_ID)
-               .HasDescriptionEqualsTo( DESCRIPTION)
-               .HasAddressEqualsTo( STREET, POSTAL_CODE, HOUSE_NUMBER, APARTMENT_NUMBER, CITY, COUNTRY)
-               .HasRoomsEqualsTo( ROOMS_DEFINITION);
     }
 
+    @Test
+    void shouldPublishApartmentBooked(){
+        ArgumentCaptor captor = ArgumentCaptor.forClass(ApartmentBooked.class);
+        final Apartment apartment = createApartment();
+
+        final Booking actual = apartment.book(TENANT_ID, PERIOD, eventChannel);
+
+        BDDMockito.then(eventChannel).should().publish(any(ApartmentBooked.class));
+    }
+
+
+    @Test
+    void shouldCreateBookingOnceBook(){
+        final Apartment apartment = createApartment();
+
+        final Booking actual = apartment.book(TENANT_ID, PERIOD, eventChannel);
+
+        BookingAssertion.assertThat(actual)
+                .isApartment()
+                .hasTenantIdEqualTo(TENANT_ID)
+                .hasDaysContainsAll(START,END);
+
+    }
 
 }
