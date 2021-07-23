@@ -11,37 +11,37 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class ApartmentTest {
 
+    public static final String OWNER_ID = "1234";
+    public static final String STREET = "Zdrowotna";
+    public static final String POSTAL_CODE = "43-384";
+    public static final String HOUSE_NUMBER = "10";
+    public static final String APARTMENT_NUMBER = "1";
+    public static final String CITY = "Jaworze";
+    public static final String COUNTRY = "Poland";
+    public static final String DESCRIPTION = "Nice place to stay";
+    public static final Map<String, Double> ROOMS_DEFINITION = ImmutableMap.of(
+            "Toilet", 10.0, "Bedroom", 30.0
+    );
+
     @Test
     void shouldCreateApartmentWithAllRequiredFields() {
-        final String ownerId = "1234";
-        final String street = "Zdrowotna";
-        final String postalCode = "43-384";
-        final String houseNumber = "10";
-        final String apartmentNumber = "1";
-        final String city = "Jaworze";
-        final String country = "Poland";
-        final String description = "Nice place to stay";
-
-        final Map<String, Double> roomsDefinition = ImmutableMap.of(
-                "Toilet", 10.0, "Bedroom", 30.0
-        );
 
         final Apartment actual = new ApartmentFactory().create(
-                ownerId,
-                street,
-                postalCode,
-                houseNumber,
-                apartmentNumber,
-                city,
-                country,
-                description,
-                roomsDefinition
+                OWNER_ID,
+                STREET,
+                POSTAL_CODE,
+                HOUSE_NUMBER,
+                APARTMENT_NUMBER,
+                CITY,
+                COUNTRY,
+                DESCRIPTION,
+                ROOMS_DEFINITION
         );
 
-        assertThatHasOwnerId(actual, ownerId);
-        assertThatHasDescription(actual, description);
-        assertThatHasAddress(actual, street, postalCode, houseNumber, apartmentNumber, city, country);
-        assertThatHasRooms(actual, roomsDefinition);
+        assertThatHasOwnerId(actual, OWNER_ID);
+        assertThatHasDescription(actual, DESCRIPTION);
+        assertThatHasAddress(actual, STREET, POSTAL_CODE, HOUSE_NUMBER, APARTMENT_NUMBER, CITY, COUNTRY);
+        assertThatHasRooms(actual, ROOMS_DEFINITION);
     }
 
     private void assertThatHasRooms(final Apartment actual, final Map<String, Double> roomsDefinition) {
