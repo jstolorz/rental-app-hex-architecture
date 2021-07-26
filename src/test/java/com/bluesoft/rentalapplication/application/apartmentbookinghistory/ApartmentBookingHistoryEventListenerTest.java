@@ -26,6 +26,8 @@ class ApartmentBookingHistoryEventListenerTest {
     private static final LocalDate START = LocalDate.of(2021, 7, 20);
     private static final LocalDate END = LocalDate.of(2021, 7, 28);
     private static final Period PERIOD = new Period(START,END);
+    private static final int FIRST_BOOKING = 1;
+    private static final int TWO_BOOKINGS = 1;
 
     private final ArgumentCaptor<ApartmentBookingHistory> captor = ArgumentCaptor.forClass(ApartmentBookingHistory.class);
     private final ApartmentBookingHistoryRepository repository = mock(ApartmentBookingHistoryRepository.class);
@@ -38,7 +40,7 @@ class ApartmentBookingHistoryEventListenerTest {
 
           then(repository).should().save(captor.capture());
 
-          thenApartmentBookingHistoryShouldHave(captor.getValue(),OWNER_ID,TENANT_ID,START,END,1);
+          thenApartmentBookingHistoryShouldHave(captor.getValue(),OWNER_ID,TENANT_ID,START,END,FIRST_BOOKING);
     }
 
     private void thenApartmentBookingHistoryShouldHave(
@@ -70,7 +72,7 @@ class ApartmentBookingHistoryEventListenerTest {
 
         then(repository).should().save(captor.capture());
 
-        thenApartmentBookingHistoryShouldHave(captor.getValue(),OWNER_ID,TENANT_ID,START,END,1);
+        thenApartmentBookingHistoryShouldHave(captor.getValue(),OWNER_ID,TENANT_ID,START,END,TWO_BOOKINGS);
     }
 
     private void givenExistingApartmentBookingHistory() {
